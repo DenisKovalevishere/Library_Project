@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+    postgres-db:
+      image: postgres:latest
+      container_name: library
+
+      environment:
+        - 'POSTGRES_USER=postgres'
+        - 'POSTGRES_PASSWORD=0147896325'
+        - 'POSTGRES_DB=library'
+      ports:
+        - 5432:5432
+      restart: always
+      
+
+      
