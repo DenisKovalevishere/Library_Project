@@ -74,17 +74,12 @@ public class BookServiseImp implements BookService{
     
     private List<Book> populateFindAllBook(SearchBookFilter filter) throws Exception{
         SearchBookFilter correctFilter = populateSearchBookFilter(filter);
-        List<Book> allBooks = bookRepository.findAll(); 
-        if(correctFilter.isSortByAuthor()==true) {
-            Collections.sort(allBooks, new SortedBooksComparator());
-           System.out.println(allBooks);
-           return allBooks;
+        if(correctFilter.isSortByAuthor()==true) {  
+           return bookRepository.findAllBookAndSortByAuthor();
         } else if(correctFilter.isSortByIndividualSerialBookNamber() == true) {
-            Collections.sort(allBooks,((b1, b2) -> b1.getIndividualSerialBookNamber().compareTo(b2.getIndividualSerialBookNamber())));
-            return allBooks;
+            return bookRepository.findAllBookAndSortByISBC();
         } else {
-            Collections.sort(allBooks);
-            return allBooks;
+            return bookRepository.findAllBookAndSortByName();
         }
         
     }
