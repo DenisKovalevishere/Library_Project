@@ -1,14 +1,11 @@
 package com.kovalev.service.imp;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kovalev.domain.author.Author;
 import com.kovalev.domain.book.Book;
 import com.kovalev.dto.SearchBookFilter;
 import com.kovalev.exception.AlreadyExistsException;
@@ -90,28 +87,9 @@ public class BookServiseImp implements BookService{
         return bookRepository.findBookByName(name);
     }
 
-}
 
-class SortedBooksComparator implements Comparator<Book> {
 
-    @Override
-    public int compare(Book arg0, Book arg1) {
-        List<Author> listAuthors1 = arg0.getAuthors();
-        List<Author> listAuthors2 = arg1.getAuthors();
-        
-        if(listAuthors1.isEmpty() && listAuthors2.isEmpty()) {
-            return arg0.compareTo(arg1);
-        } else if(listAuthors1.isEmpty() && listAuthors2!=null) {
-            return -1;
-        } else if(listAuthors1!=null && listAuthors2.isEmpty()) {
-            return 1;
-        } else {
-            Collections.sort(arg0.getAuthors());
-            Collections.sort(arg1.getAuthors());
-           
-            return arg0.getAuthors().get(0).compareTo(arg1.getAuthors().get(0));
-        }
-    }
+    
     
 }
     
